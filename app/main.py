@@ -28,7 +28,7 @@ def shop_trip() -> None:
             cost_products = [shop.products[key] * value
                              for key, value in customer.product_cart.items()]
             cost_actual = round(cost_fuel * 2 + sum(cost_products), 2)
-            print(f"{customer.name}'s trip to {shop.name} costs {cost_actual}")
+            print(f"{customer.name}'s trip to the {shop.name} costs {cost_actual}")
             if not cost or cost_actual < cost:
                 choose_shop = shop
                 cost = cost_actual
