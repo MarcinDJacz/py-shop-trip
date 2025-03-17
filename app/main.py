@@ -21,10 +21,8 @@ def shop_trip() -> None:
         total_cost = 0
         for shop in shops:
             shop_x, shop_y = shop.location
-            distance = round(
-                math.sqrt(
-                    pow((shop_x - customer_x), 2)
-                    + pow((shop_y - customer_y), 2)), 2)
+            distance = math.sqrt(pow((shop_x - customer_x), 2)
+                                 + pow((shop_y - customer_y), 2))
             cost_fuel = ((distance * customer.car["fuel_consumption"] / 100)
                          * fuel_price)
             cost_products = [shop.products[key] * value
@@ -35,7 +33,7 @@ def shop_trip() -> None:
                 choose_shop = shop
                 cost = cost_actual
                 total_cost = sum(cost_products)
-        if customer.money - total_cost >= 0:
+        if customer.money - cost_actual >= 0:
             print(f"{customer.name} rides to {choose_shop.name}")
             print("")
             print(f"Date: {datetime.datetime.now()}")
@@ -48,8 +46,8 @@ def shop_trip() -> None:
             print("See you again!")
             print("")
             print(f"{customer.name} rides home")
-            customer.money -= total_cost
-            print(f"{customer.name} now has {customer.money} dollars")
+            customer.money -= cost
+            print(f"{customer.name} now has {round(customer.money,2)} dollars")
             print("")
         else:
             print(f"{customer.name} doesn't have"
