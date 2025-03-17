@@ -28,7 +28,8 @@ def shop_trip() -> None:
             cost_products = [shop.products[key] * value
                              for key, value in customer.product_cart.items()]
             cost_actual = round(cost_fuel * 2 + sum(cost_products), 2)
-            print(f"{customer.name}'s trip to the {shop.name} costs {cost_actual}")
+            print(f"{customer.name}'s trip to the {shop.name}"
+                  f" costs {cost_actual}")
             if not cost or cost_actual < cost:
                 choose_shop = shop
                 cost = cost_actual
@@ -36,12 +37,16 @@ def shop_trip() -> None:
         if customer.money - cost_actual >= 0:
             print(f"{customer.name} rides to {choose_shop.name}")
             print("")
-            print(f"Date: {datetime.datetime.now()}")
+            format_date = datetime.datetime.now().strftime("%d/%m/%Y %X")
+            print(f"Date: {format_date}")
             print(f"Thanks, {customer.name}, for your purchase!")
             print("You have bought:")
             for key, value in customer.product_cart.items():
+                temp_cost = value * choose_shop.products[key]
+                if temp_cost == int(temp_cost):
+                    temp_cost = int(temp_cost)
                 print(f"{value} {key}s for"
-                      f" {value * choose_shop.products[key]} dollars")
+                      f" {temp_cost} dollars")
             print(f"Total cost is {total_cost} dollars")
             print("See you again!")
             print("")
